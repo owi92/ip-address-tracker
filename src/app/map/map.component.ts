@@ -1,5 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
+import { RelayService } from '../relay.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-map',
@@ -7,10 +9,13 @@ import * as L from 'leaflet';
   styleUrls: ['./map.component.css'],
 })
 export class MapComponent implements AfterViewInit {
+  clickEventSubscription?: Subscription;
   private map: any;
-  private latLong: L.LatLngExpression = [43.733334, 7.416667];
+  private latLong: any;
 
   private initMap(): void {
+    this.latLong = this.relay.getLatLong();
+
     this.map = L.map('map', {
       center: this.latLong,
       zoom: 15,
@@ -29,12 +34,19 @@ export class MapComponent implements AfterViewInit {
     const defaultMarker = L.icon({
       iconUrl: '../../assets/images/icon-location.svg',
 
-      iconAnchor: [23, 0],
+      iconSize: [46, 56],
+      iconAnchor: [23, 56],
     });
 
     L.marker(this.latLong, { icon: defaultMarker }).addTo(this.map);
   }
-  constructor() {}
+
+  constructor(private relay: RelayService) {
+    this.clickEventSubscription = this.relay.getClickEvent().subscribe(() => {
+      this.map.remove();
+      this.initMap();
+    });
+  }
 
   ngAfterViewInit(): void {
     this.initMap();

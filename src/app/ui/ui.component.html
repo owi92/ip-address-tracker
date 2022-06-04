@@ -1,0 +1,26 @@
+<div class="ui__container">
+  <h1 class="ui__heading">IP Address Tracker</h1>
+  <div class="input__container">
+    <input
+      class="ui__input"
+      type="text"
+      id="ipInput"
+      name="ipInput"
+      placeholder="192.212.174.101"
+      #ipInput
+    />
+    <button class="btn" type="button" (click)="onSubmit(ipInput.value)">
+      <img class="img__arrow" src="../../assets/images/icon-arrow.svg" alt="" />
+    </button>
+  </div>
+  <div class="stats__card">
+    <h2 class="stats__heading">IP ADDRESS</h2>
+    <p class="stats__item">{{ dataIp }}</p>
+    <h2 class="stats__heading">LOCATION</h2>
+    <p class="stats__item">{{ dataLocation }}</p>
+    <h2 class="stats__heading">TIMEZONE</h2>
+    <p class="stats__item">{{ dataTimezone }}</p>
+    <h2 class="stats__heading">ISP</h2>
+    <p class="stats__item">{{ dataISP }}</p>
+  </div>
+</div>
