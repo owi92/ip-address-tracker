@@ -17,3 +17,16 @@
 .leaflet-left {
   display: none;
 }
+
+.leaflet-control-attribution {
+  position: absolute;
+  right: 0;
+  bottom: 20.3vh;
+  width: max-content;
+}
+
+@media (max-width: 600px) {
+  .leaflet-control-attribution {
+    bottom: 21.7vh;
+  }
+}

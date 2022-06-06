@@ -1,8 +1,10 @@
 .map-frame {
-  height: 63.625vh;
+  height: 65vh;
+  overflow: hidden;
 }
 
 #map {
   height: 85vh;
+  /* height: 100%; */
   overflow: hidden;
 }

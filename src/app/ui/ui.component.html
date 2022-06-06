@@ -6,21 +6,39 @@
       type="text"
       id="ipInput"
       name="ipInput"
-      placeholder="192.212.174.101"
+      placeholder=" "
       #ipInput
+      (keyup.enter)="onSubmit(ipInput.value)"
     />
+    <label class="ui__input-label mobile--visible" for="ipInput"
+      >192.212.174.101</label
+    >
+    <label class="ui__input-label desktop--visible" for="ipInput"
+      >Search for any IP address or domain</label
+    >
     <button class="btn" type="button" (click)="onSubmit(ipInput.value)">
       <img class="img__arrow" src="../../assets/images/icon-arrow.svg" alt="" />
     </button>
   </div>
   <div class="stats__card">
-    <h2 class="stats__heading">IP ADDRESS</h2>
-    <p class="stats__item">{{ dataIp }}</p>
-    <h2 class="stats__heading">LOCATION</h2>
-    <p class="stats__item">{{ dataLocation }}</p>
-    <h2 class="stats__heading">TIMEZONE</h2>
-    <p class="stats__item">{{ dataTimezone }}</p>
-    <h2 class="stats__heading">ISP</h2>
-    <p class="stats__item">{{ dataISP }}</p>
+    <div class="stat__container">
+      <h2 class="stats__heading">IP ADDRESS</h2>
+      <p class="stats__item">{{ dataIp }}</p>
+    </div>
+    <div class="stat__border"></div>
+    <div class="stat__container">
+      <h2 class="stats__heading">LOCATION</h2>
+      <p class="stats__item">{{ dataLocation }}</p>
+    </div>
+    <div class="stat__border"></div>
+    <div class="stat__container">
+      <h2 class="stats__heading">TIMEZONE</h2>
+      <p class="stats__item">{{ dataTimezone }}</p>
+    </div>
+    <div class="stat__border"></div>
+    <div class="stat__container">
+      <h2 class="stats__heading">ISP</h2>
+      <p class="stats__item">{{ dataISP }}</p>
+    </div>
   </div>
 </div>

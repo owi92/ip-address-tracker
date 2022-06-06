@@ -11,11 +11,18 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
+  getIP(domain: any) {
+    const address = `http://ip-api.com/json/${domain}?fields=query`;
+    return this.http.get(address);
+  }
+
   getData() {
     return this.http.get(this.apiUrl);
   }
 
   updateApiUrl(ip: string) {
+    console.log('update ip: ' + ip);
+
     this.apiUrl = `${this.url}${ip}/json`;
   }
 }
