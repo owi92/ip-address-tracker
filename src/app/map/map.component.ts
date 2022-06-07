@@ -32,7 +32,7 @@ export class MapComponent implements AfterViewInit {
     tiles.addTo(this.map);
 
     const defaultMarker = L.icon({
-      iconUrl: '../../assets/images/icon-location.svg',
+      iconUrl: 'assets/images/icon-location.svg',
 
       iconSize: [46, 56],
       iconAnchor: [23, 56],
