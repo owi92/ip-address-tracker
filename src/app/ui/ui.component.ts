@@ -42,17 +42,10 @@ export class UiComponent implements OnInit {
 
         const trunc = internalIp.match(this.domainRegEx);
 
-        await new Promise(() => {
-          this.api.getIP(trunc).subscribe((res) => {
-            internalIp = Object.values(res)[0];
-            console.log('domain detected: ' + internalIp);
-
-            this.api.updateApiUrl(internalIp);
-            this.api.getData().subscribe((result) => {
-              this.processData(result);
-            });
-          });
-        });
+        var response = await fetch(`https://dns.google/resolve?name=${trunc}`);
+        var json = await response.json();
+        console.log(trunc + ': ' + json.Answer[0].data);
+        internalIp = json.Answer[0].data;
       }
     }
 
