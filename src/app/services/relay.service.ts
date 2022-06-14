@@ -7,7 +7,7 @@ import * as L from 'leaflet';
 })
 export class RelayService {
   private subject = new Subject<any>();
-  coordinates: L.LatLngExpression = [0, 0];
+  private coordinates: L.LatLngExpression = [0, 0];
 
   constructor() {}
 

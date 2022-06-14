@@ -12,8 +12,6 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   async getIP(domain: any) {
-    // const address = `http://ip-api.com/json/${domain}?fields=query`;
-
     const address = `https://dns.google/resolve?name=${domain}`;
     const response = await fetch(address);
     const json = await response.json();

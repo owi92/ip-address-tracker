@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
-import { RelayService } from '../relay.service';
+import { RelayService } from '../services/relay.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,29 +15,22 @@ export class MapComponent implements AfterViewInit {
 
   private initMap(): void {
     this.latLong = this.relay.getLatLong();
-
     this.map = L.map('map', {
       center: this.latLong,
       zoom: 15,
     });
 
-    const tiles = L.tileLayer(
-      'https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
-      {
-        maxZoom: 20,
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-        attribution: '',
-      }
-    );
-    tiles.addTo(this.map);
+    L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+      maxZoom: 20,
+      subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+      attribution: '',
+    }).addTo(this.map);
 
     const defaultMarker = L.icon({
       iconUrl: 'assets/images/icon-location.svg',
-
       iconSize: [46, 56],
       iconAnchor: [23, 56],
     });
-
     L.marker(this.latLong, { icon: defaultMarker }).addTo(this.map);
   }
 

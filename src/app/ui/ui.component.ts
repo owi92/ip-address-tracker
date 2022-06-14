@@ -1,5 +1,5 @@
-import { ApiService } from './../api.service';
-import { RelayService } from '../relay.service';
+import { ApiService } from '../services/api.service';
+import { RelayService } from '../services/relay.service';
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { IpObj } from '../ip-obj';
@@ -10,8 +10,8 @@ import { IpObj } from '../ip-obj';
   styleUrls: ['./ui.component.css'],
 })
 export class UiComponent implements OnInit {
-  data$: IpObj = {
-    ip: '192.212.174.101', //initial value/placeholder
+  data: IpObj = {
+    ip: '192.212.174.101', //initial value and placeholder
     city: '',
     region_code: '',
     postal: '',
@@ -58,7 +58,7 @@ export class UiComponent implements OnInit {
   }
 
   processData(data: any) {
-    this.data$ = data;
+    this.data = data;
     if (data.reserved) {
       return alert('IP is reserved. Please try another Address.');
     }
@@ -68,42 +68,39 @@ export class UiComponent implements OnInit {
   }
 
   getCoordinates() {
-    let coords: L.LatLngExpression = [
-      this.data$.latitude,
-      this.data$.longitude,
-    ];
+    let coords: L.LatLngExpression = [this.data.latitude, this.data.longitude];
     return coords;
   }
 
   get dataIp() {
-    return this.data$.ip;
+    return this.data.ip;
   }
 
   get dataLocation() {
-    const region = this.data$.region_code ? this.data$.region_code : null;
-    const city = this.data$.city ? this.data$.city : 'not available';
-    const zip = this.data$.postal ? this.data$.postal : null;
+    const region = this.data.region_code ? this.data.region_code : null;
+    const city = this.data.city ? this.data.city : 'not available';
+    const zip = this.data.postal ? this.data.postal : null;
     const location = zip ? `${city}, ${region} ${zip}` : `${city}`;
-    return this.data$ ? location : 'not available';
+    return this.data ? location : 'not available';
   }
 
   get dataTimezone() {
-    if (this.data$.utc_offset) {
-      const utcOffset = this.data$.utc_offset;
+    if (this.data.utc_offset) {
+      const utcOffset = this.data.utc_offset;
       const hours = utcOffset.substring(0, utcOffset.length - 2);
       const mins = utcOffset.substring(utcOffset.length - 2, utcOffset.length);
       const union = `${hours}:${mins}`;
 
-      return this.data$.utc_offset ? `UTC ${union}` : 'not available';
+      return this.data.utc_offset ? `UTC ${union}` : 'not available';
     }
     return 'not available';
   }
 
   get dataISP() {
-    return this.data$ && this.data$.org ? this.data$.org : 'not available';
+    return this.data && this.data.org ? this.data.org : 'not available';
   }
 
   ngOnInit(): void {
-    this.onSubmit(this.data$.ip);
+    this.onSubmit(this.data.ip);
   }
 }
